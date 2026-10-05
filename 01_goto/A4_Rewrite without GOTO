@@ -1,0 +1,16 @@
+SET SERVEROUTPUT ON
+DECLARE
+  v_salary employees.salary%TYPE;
+  v_new    NUMBER;
+BEGIN
+  SELECT salary INTO v_salary FROM employees WHERE emp_id = 101;
+
+  v_new := CASE
+             WHEN v_salary < 3000  THEN v_salary * 1.10
+             WHEN v_salary < 10000 THEN v_salary * 1.05
+             ELSE v_salary
+           END;
+
+  DBMS_OUTPUT.PUT_LINE('Old: ' || v_salary || '  New: ' || v_new);
+END;
+/
