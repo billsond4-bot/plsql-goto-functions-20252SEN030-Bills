@@ -1,8 +1,20 @@
+# Iiegal
+
 BEGIN
   GOTO inside_if;              -- PLS-00375: illegal GOTO statement
   IF 1 = 1 THEN
     <<inside_if>>
     DBMS_OUTPUT.PUT_LINE('Inside IF');
   END IF;
+END;
+/
+
+# Fix
+
+BEGIN
+  GOTO target;
+  DBMS_OUTPUT.PUT_LINE('Skipped');
+  <<target>>
+  DBMS_OUTPUT.PUT_LINE('Reached target legally');
 END;
 /
