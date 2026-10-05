@@ -1,15 +1,26 @@
 DECLARE
-  grade CHAR := 'B';
-  message VARCHAR2(100);
+  v_salary employees.salary%TYPE;
+  v_new    NUMBER;
 BEGIN
-  CASE
-    WHEN grade = 'A' THEN message := 'Excellent work!';
-    WHEN grade = 'B' THEN message := 'Good job';
-    WHEN grade = 'C' THEN message := 'Fair performance.';
-    WHEN grade = 'D' THEN message := 'Needs improvement.';
-    WHEN grade = 'F' THEN message := 'Failed. Please try again.';
-    ELSE message := 'Invalid grade entered.';
-  END CASE;
-  DBMS_OUTPUT.PUT_LINE('Message: ' || message);
+  SELECT salary INTO v_salary FROM employees WHERE emp_id = 101;
+
+  IF v_salary < 3000 THEN GOTO big_raise;
+  ELSIF v_salary < 10000 THEN GOTO small_raise;
+  ELSE GOTO no_raise;
+  END IF;
+
+  <<big_raise>>
+  v_new := v_salary * 1.10;
+  GOTO show_result;
+
+  <<small_raise>>
+  v_new := v_salary * 1.05;
+  GOTO show_result;
+
+  <<no_raise>>
+  v_new := v_salary;
+
+  <<show_result>>
+  DBMS_OUTPUT.PUT_LINE('Old: ' || v_salary || '  New: ' || v_new);
 END;
 /
