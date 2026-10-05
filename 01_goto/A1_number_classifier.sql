@@ -1,17 +1,31 @@
 DECLARE
-  salary NUMBER := 5000;
+  v_num NUMBER := 7;
 BEGIN
-  IF salary < 10000 THEN
-    GOTO low_salary;
+  IF v_num > 0 THEN GOTO positive;
+  ELSIF v_num < 0 THEN GOTO negative;
+  ELSE GOTO zero;
   END IF;
 
-  DBMS_OUTPUT.PUT_LINE('Salary is sufficient.');
-  GOTO end_program;
+  <<positive>>
+  DBMS_OUTPUT.PUT_LINE(v_num || ' is positive');
+  GOTO parity;
 
-  <<low_salary>>
-  DBMS_OUTPUT.PUT_LINE('Salary is too low, consider a raise.');
+  <<negative>>
+  DBMS_OUTPUT.PUT_LINE(v_num || ' is negative');
+  GOTO parity;
 
-  <<end_program>>
+  <<zero>>
+  DBMS_OUTPUT.PUT_LINE('Number is zero');
+  GOTO done;
+
+  <<parity>>
+  IF MOD(v_num, 2) = 0 THEN
+    DBMS_OUTPUT.PUT_LINE('It is even');
+  ELSE
+    DBMS_OUTPUT.PUT_LINE('It is odd');
+  END IF;
+
+  <<done>>
   NULL;
 END;
 /
