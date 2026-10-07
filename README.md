@@ -50,12 +50,6 @@ B5: Function used in SELECT statement - see screenshot B5_select_output.png
 C1: Payroll validation logic
 
 ## Screenshots
-![A1 Output](screenshots/A1_output.png)
-![A2 Output](screenshots/A2_output.png)
-![A3 Error and Fix](screenshots/A3_error_and_fix.png)
-![A4 Output](screenshots/A4_output.png)
-![B5 Select Output](screenshots/B5_select_output.png)
-![C1 Output](screenshots/C1_output.png)
 
 ## Reflection
 Detailed reflection is in docs/REFLECTION.md
